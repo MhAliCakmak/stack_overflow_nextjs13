@@ -1,4 +1,4 @@
-import Nabvar from '@/components/shared/Nabvar'
+import Nabvar from '@/components/shared/navbar/Nabvar'
 import React from 'react'
 
 const Layout = ({children}:{children: React.ReactNode}) => {
