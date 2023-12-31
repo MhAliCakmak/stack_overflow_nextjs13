@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionSchema } from "@/lib/validations";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type = "edit";
 const Question = () => {
@@ -35,14 +36,14 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     setIsSubmitting(true);
     try {
       // make an asycn call to your API -> create a question
       // contain all form data
-      
+      await createQuestion({});
       // navigate to home page
     } catch (error) {
     } finally {
@@ -136,6 +137,11 @@ const Question = () => {
                     editorRef.current = editor;
                   }}
                   initialValue=""
+                  onEditorChange={
+                    (content)=>{
+                      field.onChange(content)
+                    }
+                  }
                   init={{
                     height: 350,
                     menubar: false,
