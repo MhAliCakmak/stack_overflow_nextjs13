@@ -5,47 +5,13 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filter";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
+
 export default async function Home() {
-  const questions = [
-    {
-      _id: "1",
-      title: "What is the best way to approach learning JavaScript?",
-      tags: [
-        { _id: "1", name: "javascript" },
-        { _id: "2", name: "New Starter" },
-      ],
-      author: {
-        _id: "1",
-        name: "Mehmet Ali Çakmak",
-        picture: "https://avatars.githubusercontent.com/u/60389574?v=4",
-      },
-      answers: ["Use React hooks", "Use React hooks"],
-      upvotes: 12,
-      views: 891,
-      createdAt: new Date(),
-    },
-    {
-      _id: "2",
-      title:
-        "An HTML table where specific cells come from values in a Google Sheet identified by their neighboring cell",
-      tags: [
-        { _id: "1", name: "javascript" },
-        { _id: "2", name: "react.js" },
-        { _id: "3", name: "salesforce" },
-      ],
-      author: {
-        _id: "3",
-        name: "Oxlade Doe",
-        picture: "https://avatars.githubusercontent.com/u/60389574?v=7", // Eğer picture bilgisi yoksa burayı doldurabilirsiniz
-      },
-      upvotes: 22,
-      answers: ["Use React hooks!", "Use React hooks"],
-      views: 190,
-      createdAt: new Date(), // Veya uygun bir tarih formatında string olarak atanabilir
-    },
-  ];
+  const result=await getQuestions({});
+
 
   return (
     <>
@@ -78,8 +44,8 @@ export default async function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions ? (
-          questions.map((question) => (
+        {result.questions ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}

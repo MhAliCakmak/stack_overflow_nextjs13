@@ -67,7 +67,7 @@ export async function createQuestion(params: CreateQuestionParams) {
     connectToDatabase();
 
     const { title, content, tags, author, path } = params;
-
+   
     // Create the question
     const question = await Question.create({
       title,
@@ -92,18 +92,19 @@ export async function createQuestion(params: CreateQuestionParams) {
       $push: { tags: { $each: tagDocuments }}
     });
 
-    // Create an interaction record for the user's ask_question action
-    await Interaction.create({
-      user: author,
-      action: "ask_question",
-      question: question._id,
-      tags: tagDocuments,
-    })
+    // // Create an interaction record for the user's ask_question action
+    // await Interaction.create({
+    //   user: author,
+    //   action: "ask_question",
+    //   question: question._id,
+    //   tags: tagDocuments,
+    // })
 
     // Increment author's reputation by +5 for creating a question
-    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 }})
+    // await User.findByIdAndUpdate(author, { $inc: { reputation: 5 }})
+    return question;
 
-    revalidatePath(path)
+ 
   } catch (error) {
     console.log(error);
   }

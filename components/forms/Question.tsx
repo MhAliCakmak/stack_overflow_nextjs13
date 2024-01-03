@@ -20,11 +20,19 @@ import { QuestionSchema } from "@/lib/validations";
 import Image from "next/image";
 import { Badge } from "../ui/badge";
 import { createQuestion } from "@/lib/actions/question.action";
+import { useRouter,usePathname } from "next/navigation";
 
-const type = "edit";
-const Question = () => {
+const type:any = "edit";
+
+interface Props{
+  mangoUserId:string;
+}
+const Question = ({mangoUserId}:Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router=useRouter();
+  const pathname=usePathname()
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionSchema>>({
     resolver: zodResolver(QuestionSchema),
@@ -43,8 +51,15 @@ const Question = () => {
     try {
       // make an asycn call to your API -> create a question
       // contain all form data
-      await createQuestion({});
+      await createQuestion({
+        title:values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mangoUserId),
+        path:"/"
+      });
       // navigate to home page
+      router.push("/")
     } catch (error) {
     } finally {
       setIsSubmitting(false);
