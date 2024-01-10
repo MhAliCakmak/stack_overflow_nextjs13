@@ -39,7 +39,7 @@ const Question = ({mangoUserId}:Props) => {
     defaultValues: {
       title: "",
       explanation: "",
-      tags: [],
+      tags: []
     },
   });
 
@@ -56,7 +56,7 @@ const Question = ({mangoUserId}:Props) => {
         content: values.explanation,
         tags: values.tags,
         author: JSON.parse(mangoUserId),
-        path:"/"
+        path:pathname,
       });
       // navigate to home page
       router.push("/")
