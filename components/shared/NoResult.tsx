@@ -5,7 +5,7 @@ import Link from "next/link";
 interface Props{
     title: string,
     description?: string,
-    link?:string,
+    link?:any,
     linkTitle?:string
 }
 const NoResult = ({title,description,link,linkTitle}:Props) => {
