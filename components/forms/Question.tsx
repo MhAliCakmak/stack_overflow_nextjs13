@@ -25,9 +25,9 @@ import { useRouter,usePathname } from "next/navigation";
 const type:any = "edit";
 
 interface Props{
-  mangoUserId:string;
+  mongoUserId:string;
 }
-const Question = ({mangoUserId}:Props) => {
+const Question = ({mongoUserId}:Props) => {
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router=useRouter();
@@ -55,7 +55,7 @@ const Question = ({mangoUserId}:Props) => {
         title:values.title,
         content: values.explanation,
         tags: values.tags,
-        author: JSON.parse(mangoUserId),
+        author: JSON.parse(mongoUserId),
         path:pathname,
       });
       // navigate to home page

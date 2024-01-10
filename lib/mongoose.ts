@@ -4,13 +4,13 @@ import mongoose from "mongoose";
 let isConnected : boolean = false
 export const connectToDatabase=async ()=>{
     mongoose.set("strictQuery",true);
-    if(!process.env.MANGODB_URL) return console.log("MISSING MANGODB_URL");
+    if(!process.env.MONGODB_URL) return console.log("MISSING MONGODB_URL");
     if(isConnected){
         console.log("=> using existing database connection");
         return Promise.resolve();
     }
     try {
-        await mongoose.connect(process.env.MANGODB_URL,{
+        await mongoose.connect(process.env.MONGODB_URL,{
             dbName: "devflow",
         })
         isConnected=true;

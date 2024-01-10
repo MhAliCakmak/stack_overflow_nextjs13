@@ -3,8 +3,7 @@ const nextConfig = {
     experimental:{
         serverActions:true,
         mdxRs:true,
-        serverComponentsExternalPackages:["mangoose"]
+        serverComponentsExternalPackages:["mongoose"]
     }
 }
-
 module.exports = nextConfig

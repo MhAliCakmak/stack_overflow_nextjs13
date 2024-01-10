@@ -8,7 +8,7 @@ const Page =async () => {
 
   if (!userId) redirect("/sign-in");
 
-  const mangoUser= await getUserById({userId})
+  const mongoUser= await getUserById({userId})
 
   
 
@@ -19,7 +19,7 @@ const Page =async () => {
         Ask a question
       </h1>
       <div className="mt-9">
-        <Question mangoUserId={JSON.stringify(mangoUser._id)}/>
+        <Question mongoUserId={JSON.stringify(mongoUser._id)}/>
       </div>
     </div>
   );
