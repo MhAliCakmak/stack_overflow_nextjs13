@@ -17,7 +17,7 @@ interface Props {
 }
 
 const UserCard = ({ user }: Props) => {
-  const [interactedTags, setInteractedTags] = useState([]);
+  const [interactedTags, setInteractedTags] = useState([{}]);
 
   useEffect(() => {
     const fetchTags = async () => {
