@@ -34,7 +34,7 @@ const ParseHTML = ({ data }: Props) => {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
-  return <div className="flex flex-wrap">{parse(data)}</div>;
+  return <div className="flex flex-wrap text-dark300_light700">{parse(data)}</div>;
 };
 
 export default ParseHTML;
