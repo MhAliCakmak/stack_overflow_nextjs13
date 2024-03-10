@@ -57,7 +57,7 @@ const AllAnswers = async ({
                 </div>
               </Link>
               <div className="flex justify-end">
-            <Votes/>
+            {/* <Votes/> */}
 
               </div>
 
