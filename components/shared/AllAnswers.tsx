@@ -5,6 +5,8 @@ import { getAnswers } from "@/lib/actions/answer.action";
 import Image from "next/image";
 import Link from "next/link";
 import { getTimestamp } from "@/lib/utils";
+import ParseHTML from "./ParseHTML";
+import Votes from "./Votes";
 
 interface Props {
   questionId: string;
@@ -49,12 +51,20 @@ const AllAnswers = async ({
                     {answer.author.name}
                   </p>
 
-                  <p className="small-regular text-light400_light500 mt-0.5 line-clamp-1">
-                    <span className="max-sm:hidden">-</span>
+                  <p className="small-regular text-light400_light500 mt-0.5 ml-0.5 line-clamp-1">
                     answered {getTimestamp(answer.createdAt)}
                   </p>
                 </div>
               </Link>
+              <div className="flex justify-end">
+            <Votes/>
+
+              </div>
+
+            </div>
+            <div className="mt-4">
+
+            <ParseHTML data={answer.content}/>
             </div>
           </article>
         ))}
