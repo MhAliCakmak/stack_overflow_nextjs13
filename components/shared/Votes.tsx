@@ -34,6 +34,7 @@ const Votes = ({
   const handleSave = () => {};
   const pathname = usePathname();
   const router = useRouter();
+
   const handleVote = async (action: string) => {
     if (!userId) {
       return;
@@ -48,13 +49,14 @@ const Votes = ({
           path: pathname,
         });
       } else if (type === "Answer") {
+        console.log(userId);
         upvoteAnswer({
           answerId: itemId,
           userId: userId,
           hasupVoted: hashupVoted,
           hasdownVoted: hashdownVoted,
-          path: pathname
-        })
+          path: pathname,
+        });
       }
 
       // TODO: show a toast
@@ -73,8 +75,8 @@ const Votes = ({
           userId: userId,
           hasupVoted: hashupVoted,
           hasdownVoted: hashdownVoted,
-          path: pathname
-        })
+          path: pathname,
+        });
       }
       // TODO: show a toast
     }
@@ -95,7 +97,7 @@ const Votes = ({
             className="cursor-pointer"
             onClick={() => handleVote("upvote")}
           />
-          <div className="flex-center bacground-light700_dark400 min-[18px] rounded-sm p-1">
+          <div className="flex-center background-light700_dark400 min-[18px] rounded-sm p-1">
             <p className="subtle-medium text-dark400_light900">
               {formatAndDivideNumber(upvotes)}
             </p>
@@ -114,25 +116,27 @@ const Votes = ({
             className="cursor-pointer"
             onClick={() => handleVote("downvote")}
           />
-          <div className="flex-center bacground-light700_dark400 min-[18px] rounded-sm p-1">
+          <div className="flex-center background-light700_dark400 min-[18px] rounded-sm p-1">
             <p className="subtle-medium text-dark400_light900">
               {formatAndDivideNumber(downvotes)}
             </p>
           </div>
         </div>
       </div>
-      <Image
-        src={
-          hasSaved
-            ? "/assets/icons/star-filled.svg"
-            : "/assets/icons/star-red.svg"
-        }
-        width={18}
-        height={18}
-        alt="star"
-        className="cursor-pointer"
-        onClick={handleSave}
-      />
+      {type === "Question" && (
+        <Image
+          src={
+            hasSaved
+              ? "/assets/icons/star-filled.svg"
+              : "/assets/icons/star-red.svg"
+          }
+          width={18}
+          height={18}
+          alt="star"
+          className="cursor-pointer"
+          onClick={handleSave}
+        />
+      )}
     </div>
   );
 };
