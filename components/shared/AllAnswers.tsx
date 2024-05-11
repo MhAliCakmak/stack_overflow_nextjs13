@@ -7,6 +7,8 @@ import Link from "next/link";
 import { getTimestamp } from "@/lib/utils";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
+import { auth } from "@clerk/nextjs";
+import { getUserById } from "@/lib/actions/user.action";
 
 interface Props {
   questionId: string;
@@ -57,14 +59,19 @@ const AllAnswers = async ({
                 </div>
               </Link>
               <div className="flex justify-end">
-            {/* <Votes/> */}
-
+                <Votes
+                  type="Question"
+                  itemId={answer._id}
+                  userId={userId}
+                  upvotes={answer.upvotes.length}
+                  hashupVoted={answer.downvotes.includes(userId)}
+                  downvotes={answer.downvotes.length}
+                  hashdownVoted={answer.downvotes.includes(userId)}
+                />
               </div>
-
             </div>
             <div className="mt-4">
-
-            <ParseHTML data={answer.content}/>
+              <ParseHTML data={answer.content} />
             </div>
           </article>
         ))}
