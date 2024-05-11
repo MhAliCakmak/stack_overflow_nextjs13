@@ -1,7 +1,13 @@
 "use client";
 
+import {
+  downvoteQuestion,
+  upvoteQuestion,
+} from "@/lib/actions/question.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import React from "react";
 
 interface Props {
@@ -24,12 +30,54 @@ const Votes = ({
   hashdownVoted,
   hasSaved,
 }: Props) => {
-    const handleSave=()=>{
-
+  const handleSave = () => {};
+  const pathname = usePathname();
+  const router = useRouter();
+  const handleVote = async (action: string) => {
+    if (!userId) {
+      return;
     }
-    const handleVote=(voteType:string)=>{
-            
-        }
+    if (action === "upvote") {
+      if (type === "Question") {
+        upvoteQuestion({
+          questionId: itemId,
+          userId: userId,
+          hasupVoted: hashupVoted,
+          hasdownVoted: hashdownVoted,
+          path: pathname,
+        });
+      } else if (action === "Answer") {
+        // upvoteAnswer({
+        //   answerId: itemId,
+        //   userId: userId,
+        //   hasupVoted: hashupVoted,
+        //   hasdownVoted: hashdownVoted,
+        //   path: pathname
+        // })
+      }
+
+      // TODO: show a toast
+    } else if (action === "downvote") {
+      if (type === "Question") {
+        downvoteQuestion({
+          questionId: itemId,
+          userId: userId,
+          hasupVoted: hashupVoted,
+          hasdownVoted: hashdownVoted,
+          path: pathname,
+        });
+      } else if (action === "Answer") {
+        // downvoteAnswer({
+        //   answerId: itemId,
+        //   userId: userId,
+        //   hasupVoted: hashupVoted,
+        //   hasdownVoted: hashdownVoted,
+        //   path: pathname
+        // })
+      }
+      // TODO: show a toast
+    }
+  };
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
@@ -55,7 +103,7 @@ const Votes = ({
         <div className="flex-center gap-1.5">
           <Image
             src={
-              hashupVoted
+              hashdownVoted
                 ? "/assets/icons/downvoted.svg"
                 : "/assets/icons/downvote.svg"
             }
