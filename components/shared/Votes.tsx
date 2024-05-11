@@ -1,5 +1,6 @@
 "use client";
 
+import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.action";
 import {
   downvoteQuestion,
   upvoteQuestion,
@@ -46,14 +47,14 @@ const Votes = ({
           hasdownVoted: hashdownVoted,
           path: pathname,
         });
-      } else if (action === "Answer") {
-        // upvoteAnswer({
-        //   answerId: itemId,
-        //   userId: userId,
-        //   hasupVoted: hashupVoted,
-        //   hasdownVoted: hashdownVoted,
-        //   path: pathname
-        // })
+      } else if (type === "Answer") {
+        upvoteAnswer({
+          answerId: itemId,
+          userId: userId,
+          hasupVoted: hashupVoted,
+          hasdownVoted: hashdownVoted,
+          path: pathname
+        })
       }
 
       // TODO: show a toast
@@ -66,14 +67,14 @@ const Votes = ({
           hasdownVoted: hashdownVoted,
           path: pathname,
         });
-      } else if (action === "Answer") {
-        // downvoteAnswer({
-        //   answerId: itemId,
-        //   userId: userId,
-        //   hasupVoted: hashupVoted,
-        //   hasdownVoted: hashdownVoted,
-        //   path: pathname
-        // })
+      } else if (type === "Answer") {
+        downvoteAnswer({
+          answerId: itemId,
+          userId: userId,
+          hasupVoted: hashupVoted,
+          hasdownVoted: hashdownVoted,
+          path: pathname
+        })
       }
       // TODO: show a toast
     }
