@@ -5,6 +5,7 @@ import {
   downvoteQuestion,
   upvoteQuestion,
 } from "@/lib/actions/question.action";
+import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,9 +32,15 @@ const Votes = ({
   hashdownVoted,
   hasSaved,
 }: Props) => {
-  const handleSave = () => {};
+  const handleSave = async () => {
+    await toggleSaveQuestion({
+      questionId: itemId,
+      userId: userId,
+      path: pathname,
+    });
+  };
   const pathname = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleVote = async (action: string) => {
     if (!userId) {

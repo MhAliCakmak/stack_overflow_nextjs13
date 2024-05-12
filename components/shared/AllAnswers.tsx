@@ -33,7 +33,7 @@ const AllAnswers = async ({
         <h3 className="primary-text-gradient">{totalAnswers} Answers</h3>
         <Filters filters={AnswerFilters} />
       </div>
-      <div className="mb-8 flex flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2">
+      <div className="mb-8 flex flex-col-reverse justify-between gap-5  sm:items-center sm:gap-2">
         {result.answers.map((answer) => (
           <article key={answer._id} className="light-border border-b py-10">
             <div className="flex items-center justify-between">
