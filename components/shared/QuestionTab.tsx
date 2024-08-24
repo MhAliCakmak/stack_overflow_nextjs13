@@ -27,7 +27,7 @@ const QuestionTab = async ({ searchParams, userId, clerkId }: Props) => {
           author={question.author}
           upvotes={question.upvotes}
           views={question.views}
-          answers={question.answers}
+          answers={question.answers && question.answers.length}
           createdAt={question.createdAt}
         />
       ))}
